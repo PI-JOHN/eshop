@@ -3,6 +3,13 @@
 
 class User
 {
+    /**
+     *  User registration
+     * @param $userName
+     * @param $userEmail
+     * @param $userPassword
+     * @return bool
+     */
     public static function register($userName, $userEmail,$userPassword)
     {
 
@@ -16,6 +23,11 @@ class User
 
     }
 
+    /**
+     * password validation check
+     * @param $userPassword
+     * @return bool
+     */
     public static function checkPassword($userPassword)
     {
         if (strlen($userPassword) < 6){
@@ -25,6 +37,11 @@ class User
         }
     }
 
+    /**
+     * user validation check
+     * @param $userName
+     * @return bool
+     */
     public static function checkUserName($userName)
     {
         if (strlen($userName) < 2){
@@ -34,6 +51,12 @@ class User
         }
     }
 
+    /**
+     * checking the existense of
+     * an address in the database
+     * @param $userEmail
+     * @return bool
+     */
     public static function checkEmailExists($userEmail)
     {
         $db = Db::getConnectionMag();
@@ -51,6 +74,11 @@ class User
 
     }
 
+    /**
+     * email check validation
+     * @param $userEmail
+     * @return bool
+     */
     public static function checkEmail($userEmail)
     {
         if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL)){
@@ -61,6 +89,8 @@ class User
     }
 
     /**
+     * exists is a user with
+     * such data or not
      * @param $email
      * @param $password
      * @return bool
@@ -81,21 +111,92 @@ class User
 
     }
 
-    /** Запоминаем пользователя
+    /**
+     * remember user
      * @param $userId
      */
     public static function auth($userId)
     {
-        session_start();
+
         $_SESSION['user'] = $userId;
     }
 
+    /**
+     * user access check
+     * @return mixed
+     */
     public static function checkLogged()
     {
-        session_start();
+
         if (isset($_SESSION['user'])){
             return $_SESSION['user'];
         }
         header ('Location: /user/login');
     }
+
+    /**
+     * is the user authorized?
+     * @return bool
+     */
+    public static function isGuest()
+    {
+
+        if(isset($_SESSION['user'])){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * edit user data in the database
+     * @param $userName
+     * @param $userEmail
+     * @param $userPassword
+     * @param $userId
+     * @return mixed
+     */
+    public static function edit($name,$password,$userId)
+    {
+        $db = Db::getConnectionMag();
+        $sql = 'UPDATE user SET name = :name, password = :password WHERE id = :id';
+        $result = $db->prepare($sql);
+        $result->bindParam(':name',$name ,PDO::PARAM_STR);
+        $result->bindParam(':password',$password ,PDO::PARAM_STR);
+        $result->bindParam(':id',$userId ,PDO::PARAM_INT);
+
+        return $result->execute();
+  ;
+    }
+
+    /**
+     * returns user by id
+     * @param $userId
+     * @return mixed
+     */
+    public static function getUserById($userId)
+    {
+        $db = Db::getConnectionMag();
+        $sql = 'SELECT * FROM user WHERE id = :id';
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $userId, PDO::PARAM_INT);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+        return $result->fetch();
+    }
+
+    public static function checkName($userName)
+    {
+        if (strlen($userName) < 2){
+            return false;
+        } return true;
+    }
+
+    public static function checkPhone($userPhone)
+    {
+        if (strlen($userPhone) < 7){
+            return false;
+        } return true;
+    }
+
+
 }

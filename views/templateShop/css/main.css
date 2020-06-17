@@ -10,7 +10,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background:;
   position: relative;
-  font-weight:400px;
+  font-weight:400;
 }
 
 ul li {
@@ -21,6 +21,12 @@ a:hover {
 outline: none;
 text-decoration:none;
 }
+
+/*.cycle-slideshow {*/
+/*  width: 45%;*/
+/*}*/
+
+
 
 a:focus {
   outline:none;
@@ -91,7 +97,7 @@ a#scrollUp i{
   border: 0 none;
   border-radius: 0;
   color: #696763;
-  padding:0px;
+  padding:0;
 }
 
 

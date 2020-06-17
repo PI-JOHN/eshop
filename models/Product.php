@@ -83,4 +83,53 @@ class Product
         $row = $result->fetch();
         return $row['count'];
     }
+
+    public static function getProductsByIds($ids)
+    {
+        $idsString = implode(',', $ids);
+        $db = Db::getConnectionMag();
+        $sql = "SELECT * FROM product WHERE status='1' AND id IN ($idsString)" ;
+        $result = $db->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $products = array();
+        $i = 0;
+        while($row = $result->fetch()){
+            $products[$i]['id'] = $row['id'];
+            $products[$i]['name'] = $row['name'];
+            $products[$i]['code'] = $row['code'];
+            $products[$i]['price'] = $row['price'];
+
+            $i++;
+        }
+        return $products;
+    }
+
+    public static function isRecommended()
+    {
+        $db = Db::getConnectionMag();
+        $sql = "SELECT * FROM product WHERE status = '1' AND is_recommended = '1' LIMIT 6";
+        $result = $db->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $recommended = array();
+        $i = 0;
+        while($row = $result->fetch()){
+            $recommended[$i]['id'] = $row['id'];
+            $recommended[$i]['name'] = $row['name'];
+            $recommended[$i]['price'] = $row['price'];
+            $recommended[$i]['is_new'] = $row['is_new'];
+            $i++;
+        }
+        return $recommended;
+    }
+
+    public static function getImage($id)
+    {
+        $noImage = 'no-image.jpg';
+        $path = '/images/';
+        $pathToImage = $path . $id . '.jpg';
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToImage)){
+            return $pathToImage;
+        }
+        return $path . $noImage;
+    }
 }

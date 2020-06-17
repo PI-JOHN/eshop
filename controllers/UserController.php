@@ -75,4 +75,14 @@ class UserController
         require_once __DIR__.'/../views/user/login.php';
         return true;
     }
+
+    public function actionLogout()
+    {
+        session_start();
+        unset($_SESSION['user']);
+        header('Location: /');
+
+    }
+
+
 }

@@ -19,6 +19,8 @@ return [
     'cabinet/edit' => 'cabinet/edit',
     'cabinet/history' => 'cabinet/history',
     'cabinet' => 'cabinet/index',
+    //Админпанель
+    'admin' => 'admin/index',
     'contacts' => 'site/contact',
 
     '' => 'site/index', //actionIndex в SiteController

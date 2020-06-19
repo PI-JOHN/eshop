@@ -14,14 +14,14 @@
 
 
 
-<script src="/template/js/jquery.js"></script>
-<script src="/template/js/jquery.cycle2.min.js"></script>
-<script src="/template/js/jquery.cycle2.carousel.min.js"></script>
-<script src="/template/js/bootstrap.min.js"></script>
-<script src="/template/js/jquery.scrollUp.min.js"></script>
-<script src="/template/js/price-range.js"></script>
-<script src="/template/js/jquery.prettyPhoto.js"></script>
-<script src="/template/js/main.js"></script>
+<script src="/views/templateShop/js/jquery.js"></script>
+<script src="/views/templateShop/js/jquery.cycle2.min.js"></script>
+<script src="/views/templateShop/js/jquery.cycle2.carousel.min.js"></script>
+<script src="/views/templateShop/js/bootstrap.min.js"></script>
+<script src="/views/templateShop/js/jquery.scrollUp.min.js"></script>
+<script src="/views/templateShop/js/price-range.js"></script>
+<script src="/views/templateShop/js/jquery.prettyPhoto.js"></script>
+<script src="/views/templateShop/js/main.js"></script>
 <script>
     $(document).ready(function(){
         $(".add-to-cart").click(function () {

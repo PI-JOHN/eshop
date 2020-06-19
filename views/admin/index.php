@@ -1,3 +1,4 @@
+<?php require_once __DIR__.'/../layouts/admin-header.php'; ?>
 
 
     <section>
@@ -16,4 +17,4 @@
             </div>
         </div>
     </section>
-
+<?php require_once __DIR__.'/../layouts/admin-footer.php'; ?>

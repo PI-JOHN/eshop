@@ -2,7 +2,9 @@
 <section>
     <div class="container">
         <div class="row">
-
+            <?php if (AdminBase::checkAdmin()): ?>
+              <a href="/admin"><i class="fa fa-edit"></i> Админпанель</a><br><br>
+            <?php endif; ?>
             <h1>Кабинет пользователя</h1>
             <h3>Привет, <?php echo $user['name']; ?></h3>
             <ul>
@@ -14,4 +16,3 @@
     </div>
 </section>
 <?php include_once __DIR__.'/../layouts/footer.php'; ?>
-

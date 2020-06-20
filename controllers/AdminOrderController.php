@@ -18,6 +18,10 @@ class AdminOrderController extends AdminBase
     self::checkAdmin();
 
     $order = Order::getOrderById($id);
+    $productQuantity = json_decode($order['products'], true);
+    $ids = array_keys($productQuantity);
+
+    $products = Product::getProductsByIds($ids);
 
     require_once __DIR__.'/../views/admin-order/view.php';
     return true;
@@ -39,7 +43,7 @@ class AdminOrderController extends AdminBase
 
       Order::updateOrderById($id , $userName, $userPhone, $userComment, $userProducts, $status);
 
-      header('Location: /admin/order')
+      header('Location: /admin/order');
     }
     require_once __DIR__.'/../views/admin-order/update.php';
     return true;

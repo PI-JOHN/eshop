@@ -2,6 +2,9 @@
 
 class AdminCategoryController extends AdminBase
 {
+  /**
+  * action for page 'Category Management'
+  */
   public function actionIndex()
   {
     self::checkAdmin();
@@ -12,6 +15,10 @@ class AdminCategoryController extends AdminBase
     return true;
   }
 
+
+/**
+* action for page 'Create category'
+*/
   public function actionCreate()
   {
     self::checkAdmin();
@@ -37,6 +44,9 @@ class AdminCategoryController extends AdminBase
     return true;
   }
 
+/**
+* action for page 'Update Category'
+*/
   public function actionUpdate($id)
   {
     self::checkAdmin();
@@ -56,6 +66,10 @@ class AdminCategoryController extends AdminBase
     return true;
   }
 
+
+/**
+* action for page 'Delete Category'
+*/
   public function actionDelete($id)
   {
     self::checkAdmin();

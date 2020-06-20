@@ -48,6 +48,8 @@ VALUES (:user_name, :user_phone, :user_comment, :user_id, :products)';
       $i = 0;
       while($row = $result->fetch()){
         $orders[$i]['user_name'] = $row['user_name'];
+        $orders[$i]['date'] = $row['date'];
+        $orders[$i]['id'] = $row['id'];
         $orders[$i]['user_phone'] = $row['user_phone'];
         $orders[$i]['user_comment'] = $row['user_comment'];
         $orders[$i]['user_id'] = $row['user_id'];
@@ -82,5 +84,16 @@ VALUES (:user_name, :user_phone, :user_comment, :user_id, :products)';
       $result = $db->prepare($sql);
       $result->bindParam(':id', $id, PDO::PARAM_INT);
       return $result->execute();
+    }
+
+
+    public static function getStatusText($status)
+    {
+      switch($status){
+        case '1' : return 'Новый заказ'; break;
+        case '2' : return 'В обработке'; break;
+        case '3' : return 'Доставляется'; break;
+        case '4' : return 'Заказ закрыт'; break;
+      }
     }
 }

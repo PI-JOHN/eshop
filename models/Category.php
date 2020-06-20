@@ -42,4 +42,51 @@ class Category
         return $categoriesList;
     }
 
+    public static function getCategoryById($id)
+    {
+      $db = Db::getConnectionMag();
+      $sql = 'SELECT name, sort_order, status FROM category WHERE id = :id';
+      $result = $db->prepare($sql);
+      $result->bindParam(':id', $id, PDO::PARAM_INT);
+      $result->setFetchMode(PDO::FETCH_ASSOC);
+      $result->execute();
+      return $result->fetch();
+    }
+
+    /**
+    * create new category into database
+    */
+    public static function createCategory($name, $sortOrder, $status)
+    {
+
+      $db = Db::getConnectionMag();
+      $sql = 'INSERT INTO category (name, sort_order, status) VALUES (:name, :sort_order, :status)';
+      $result = $db->prepare($sql);
+      $result->bindParam(':name', $name, PDO::PARAM_STR);
+      $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
+      $result->bindParam(':status', $status, PDO::PARAM_INT);
+      return $result->execute();
+    }
+
+     public static function updateCategoryById($id, $name, $sortOrder, $status)
+     {
+       $db = Db::getConnectionMag();
+       $sql = 'UPDATE category SET name = :name, sort_order = :sort_order, status = :status WHERE id = :id';
+       $result = $db->prepare($sql);
+       $result->bindParam(':id', $id, PDO::PARAM_INT);
+       $result->bindParam(':name', $name, PDO::PARAM_STR);
+       $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
+       $result->bindParam(':status', $status, PDO::PARAM_INT);
+       return $result->execute();
+     }
+
+     public static function deleteCategoryById($id)
+     {
+       $db = Db::getConnectionMag();
+       $sql = 'DELETE FROM category WHERE id = :id';
+       $result = $db->prepare($sql);
+       $result->bindParam(':id', $id, PDO::PARAM_INT);
+       return $result->execute();
+     }
+
 }

@@ -187,4 +187,25 @@ class Product
       }
         return 0;
     }
+
+    public static function updateProductById($id, $options)
+    {
+      $db = Db::getConnectionMag();
+      $sql = "UPDATE product set name = :name, code = :code, price = :price, category_id = :category_id,
+      brand = :brand, availability = :availability, description = :description,
+      is_new = :is_new, is_recommended = :is_recommended, status = :status WHERE id = :id";
+      $result = $db->prepare($sql);
+      $result->bindParam(':id', $id, PDO::PARAM_STR);
+      $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+      $result->bindParam(':code', $options['code'], PDO::PARAM_INT);
+      $result->bindParam(':price', $options['price'], PDO::PARAM_INT);
+      $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
+      $result->bindParam(':brand', $options['brand'], PDO::PARAM_STR);
+      $result->bindParam(':availability', $options['availability'], PDO::PARAM_INT);
+      $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
+      $result->bindParam(':is_new', $options['is_new'], PDO::PARAM_INT);
+      $result->bindParam(':is_recommended', $options['is_recommended'], PDO::PARAM_INT);
+      $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
+      return $result->execute();
+    }
 }

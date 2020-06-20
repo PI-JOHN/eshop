@@ -25,7 +25,7 @@ return [
 
     'admin/category/create' => 'adminCategory/create',
     'admin/category/update/([0-9]+)' => 'adminCategory/update/$1',
-    'admin/category/delete/([0-9]+)' => 'adminCaategory/delete/$1',
+    'admin/category/delete/([0-9]+)' => 'adminCategory/delete/$1',
     'admin/category' => 'adminCategory/index',
 
     'admin/order/update/([0-9]+)' => 'adminOrder/update/$1',

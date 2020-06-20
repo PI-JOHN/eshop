@@ -35,13 +35,13 @@ class AdminOrderController extends AdminBase
     $order = Order::getOrderById($id);
 
     if (isset($_POST['submit'])){
-      $userName = $_POST['user_name'];
-      $userPhone = $_POST['user_phone'];
-      $userComment = $_POST['user_comment'];
-      $userProducts = $_POST['user_products'];
+      $userName = $_POST['userName'];
+      $userPhone = $_POST['userPhone'];
+      $userComment = $_POST['userComment'];
+      $date = $_POST['date'];
       $status = $_POST['status'];
 
-      Order::updateOrderById($id , $userName, $userPhone, $userComment, $userProducts, $status);
+      Order::updateOrderById($id , $userName, $userPhone, $userComment, $date, $status);
 
       header('Location: /admin/order');
     }

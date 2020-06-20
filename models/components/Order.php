@@ -96,4 +96,14 @@ VALUES (:user_name, :user_phone, :user_comment, :user_id, :products)';
         case '4' : return 'Заказ закрыт'; break;
       }
     }
+
+
+    public static function deleteOrderById($id)
+    {
+      $db = Db::getConnectionMag();
+      $sql = 'DELETE FROM product_order WHERE id = :id';
+      $result = $db->prepare($sql);
+      $result->bindParam(':id', $id, PDO::PARAM_INT);
+      return $result->execute();
+    }
 }

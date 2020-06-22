@@ -26,7 +26,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="<?php echo Product::getImage($product['id']);  ?>" width="200" alt="" />
+                                    <img src="<?php echo Product::getImage($product['id']);  ?>" class="img-thumbnail" width="200" alt="" />
                                     <h2>$<?php echo $product['price']; ?></h2>
                                     <p><a href="/product/<?php echo $product['id']; ?>"> <?php echo $product['name']; ?></a></p>
                                     <a href="/cart/add/<?php echo $product['id']; ?>" class="btn btn-default add-to-cart" data-id="<?php echo $product['id']; ?>">
@@ -59,7 +59,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="<?php echo Product::getImage($sliderItem['id']); ?>" alt="" />
+                                            <img src="<?php echo Product::getImage($sliderItem['id']); ?>" class="img-thumbnail" alt="" />
                                             <h2>$<?php echo $sliderItem['price']; ?></h2>
                                             <a href="/product/<?php echo $sliderItem['id']; ?>">
                                                 <?php echo $product['name']; ?>

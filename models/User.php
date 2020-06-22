@@ -14,6 +14,7 @@ class User
     {
 
                 $db = Db::getConnectionMag();
+                $userPassword = password_hash($userPassword, PASSWORD_DEFAULT);
                 $sql = 'INSERT INTO user (name , email, password) VALUES (:userName, :userEmail, :userPassword)';
                 $result = $db->prepare($sql);
                 $result->bindParam(':userName', $userName, PDO::PARAM_STR);
@@ -95,21 +96,47 @@ class User
      * @param $password
      * @return bool
      */
+
     public static function checkUserData($email,$password)
     {
         $db = Db::getConnectionMag();
-        $sql = 'SELECT * FROM user WHERE email = :email AND password = :password';
-        $result = $db->prepare($sql);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':password', $password, PDO::PARAM_STR);
-        $result->execute();
-        $user = $result->fetch();
-        if ($user){
-            return $user['id'];
-        }
-        return false;
 
+        $sql = 'SELECT email,password FROM user ORDER BY id ASC';
+        $result = $db->query($sql);
+        $usersList=$result->setFetchMode(PDO::FETCH_KEY_PAIR);
+        $usersList = $result->fetchAll();
+        //var_dump($usersList);
+        if(password_verify($password, $usersList[$email])){
+            $db = Db::getConnectionMag();
+            $sql = 'SELECT * FROM user WHERE email = :email';
+            $result = $db->prepare($sql);
+            $result->bindParam(':email', $email, PDO::PARAM_STR);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $result->execute();
+            $user = $result->fetch();
+            //var_dump($user);
+            if ($user){
+                return $user['id'];
+            } return false;
+        }
     }
+
+
+//    public static function checkUserData($email,$password)
+//    {
+//        $db = Db::getConnectionMag();
+//        $sql = 'SELECT * FROM user WHERE email = :email AND password = :password';
+//        $result = $db->prepare($sql);
+//        $result->bindParam(':email', $email, PDO::PARAM_STR);
+//        $result->bindParam(':password', $password, PDO::PARAM_STR);
+//        $result->execute();
+//        $user = $result->fetch();
+//        if ($user){
+//            return $user['id'];
+//        }
+//        return false;
+//
+//    }
 
     /**
      * remember user

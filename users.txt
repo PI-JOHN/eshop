@@ -1,0 +1,3 @@
+anton@mail.ru - 123456  - admin
+vasya@test.ru  - 123456
+serg@mail.com - 111111

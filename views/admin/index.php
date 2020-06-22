@@ -1,5 +1,5 @@
 <?php require_once __DIR__.'/../layouts/admin-header.php'; ?>
-
+            <?php if (AdminBase::checkAdmin()): ?>
 
     <section>
         <div class="container">
@@ -17,4 +17,5 @@
             </div>
         </div>
     </section>
+<?php endif; ?>
 <?php require_once __DIR__.'/../layouts/admin-footer.php'; ?>

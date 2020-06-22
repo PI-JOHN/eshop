@@ -8,7 +8,7 @@ class CabinetController
         $userId = User::checkLogged();
 
         $user = User::getUserById($userId);
-        //var_dump($user);
+        //var_dump($user['password']);
         require_once __DIR__.'/../views/cabinet/index.php';
         return true;
     }

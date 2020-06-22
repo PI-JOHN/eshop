@@ -67,7 +67,7 @@ class UserController
                 $errors[] = 'Неправильные данные входа на сайт';
             } else {
                 User::auth($userId);
-
+                //var_dump($_SESSION['user']);
                 header('Location: /cabinet/');
             }
         }

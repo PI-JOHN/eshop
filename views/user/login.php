@@ -17,6 +17,7 @@
                         <input type="email" name="email" placeholder="email" value="<?php echo $email; ?>">
                         <input type="password" name="password" placeholder="password" value="<?php echo $password; ?>">
                         <input type="submit" name="submit" class="btn btn-default" value="Войти">
+                        <a href="/user/register/"><input type="button" name="submitReg" class="btn btn-danger" value="Регистрация"></a>
                     </form>
                 </div>
             </div>
